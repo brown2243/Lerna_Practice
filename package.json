@@ -1,0 +1,11 @@
+{
+  "name": "root",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "eslint": "^7.28.0",
+    "lerna": "^4.0.0"
+  }
+}
