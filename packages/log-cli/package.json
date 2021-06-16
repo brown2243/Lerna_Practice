@@ -1,6 +1,6 @@
 {
   "name": "log-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "cli",
   "author": "brown <brown@r2v.io>",
   "homepage": "https://github.com/brown2243/Lerna_Practice#readme",
@@ -27,6 +27,6 @@
   },
   "dependencies": {
     "commander": "^7.2.0",
-    "log-core": "^1.0.0"
+    "log-core": "^1.0.1"
   }
 }
