@@ -77,6 +77,7 @@ lerna bootstrap 이 실행되면 다음을 수행합니다.
 3. 모든 bootstrapped 패키지에서 npm run prepublish 실행 (–ignore-prepublish 가 전달 되지 않는 한)
 4. 모든 bootstrapped 패키지에서 npm run prepare 실행
    bootstrap 명령 중에 npm install 에 직접 인수로 전달 될 문자열을 터미널 실행 명령어 뒤에 {옵션} 으로 설정하여 npm 클라이언트에 전달하거나 lerna.json 파일에서 npmClientArgs 속성에 glob 배열형태로 설정할 수 있습니다.
+   참조 https://www.js2uix.com/frontend/lerna-step-2/
 
 ---
 
