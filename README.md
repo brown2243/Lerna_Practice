@@ -1,4 +1,4 @@
-# Lerna_Practice
+# Lerna_Practice (21/06/16 작성)
 
 레르나를 한번 사용해보는 repository 참조 https://kdydesign.github.io/2020/08/27/mono-repo-lerna-example/
 
@@ -67,9 +67,43 @@
    이 과정에서 삽질 하다가 어느순간 진행이 되는데
    `lerna link` or `lerna bootstrap` 둘 중 하나가 해결해 준듯 하다.
 
-9. 패키지내 참조 및 설치
+---
+
+(6/17 추가)
+lerna bootstrap 이 실행되면 다음을 수행합니다.
+
+1. 각 패키지의 모든 외부 종속성을 npm install 로 설치
+2. 서로 의존하는 Lerna 패키지를 Symlink (심볼릭 링크) 처리
+3. 모든 bootstrapped 패키지에서 npm run prepublish 실행 (–ignore-prepublish 가 전달 되지 않는 한)
+4. 모든 bootstrapped 패키지에서 npm run prepare 실행
+   bootstrap 명령 중에 npm install 에 직접 인수로 전달 될 문자열을 터미널 실행 명령어 뒤에 {옵션} 으로 설정하여 npm 클라이언트에 전달하거나 lerna.json 파일에서 npmClientArgs 속성에 glob 배열형태로 설정할 수 있습니다.
+
+---
+
+1. 패키지내 참조 및 설치
    위의 과정만으로도 로컬에서는 log-cli 와 log-core 가 연동된다. 하지만 실제 패키지를 배포하면 오류가 발생한다고 한다.
    이 오류는 log-cli에서 log-core를 삽입하였는데 실제로 log-cli에는 log-core가 종속되지 않았기 때문에 발생한다. 이를 해결하기 위해서는 lerna add를 통해서 log-cli에 log-core를 설치해 해줘야 한다.
+   `lerna add log-core --scope=log-cli`
+
+2. commit and push
+   반영하기 전에 .gitignore를 작성하자
+   code .gitignore
+
+   ```
+   .idea
+   node_modules
+   *.lock
+   *lock.json
+   ```
+
+3. 패키지 배포
+
+   - 배포전에 npm 로그인을 해야한다.
+   - 로그인 체크는 npm whoami
+   - 배포는 `lerna publish`
+   - 배포된 패키지는 72시간이 지나면 삭제할 수 없어서 불필요한 패키지라면 미리 삭제하자.
+
+   이쯤에서 삭제하고 마무리!
 
 ---
 
@@ -87,3 +121,6 @@ package.json 의 dev dependencies
 lerna 에서는 제품에 포함되지 않는, dev dependencies 를 root 로 모을 수 있다.
 lerna link convert 명령어를 실행하면, 모든 package 에 설정된 devDependencies 을 root devDependencies 으로 옮긴다.
 그리고, dependencies 에 package 를 file:packages/package-1 형태로 연결한다.
+
+npm 배포참조
+https://kdydesign.github.io/2020/08/28/npm-tutorial/
